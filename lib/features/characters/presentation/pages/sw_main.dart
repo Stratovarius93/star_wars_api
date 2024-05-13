@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_wars_app/core/navigator/navigator_route.dart';
+import 'package:star_wars_app/core/widgets/cube/cube.dart';
 import 'package:star_wars_app/core/widgets/infinite_list.dart';
 import 'package:star_wars_app/core/widgets/refresh_indicator.dart';
 import 'package:star_wars_app/features/characters/data/model/sw_gender_model.dart';
@@ -42,6 +43,7 @@ class _SWMainPageState extends State<SWMainPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const RotateSquare(),
           SWFilter(
             onFilterChanged: (filter) {
               setState(() {
