@@ -1,6 +1,6 @@
+import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,15 +12,16 @@ class RotateSquare extends StatefulWidget {
 }
 
 class _RotateSquareState extends State<RotateSquare> {
-  MethodChannel gyroscopeChannel = const MethodChannel('gyroscope_channel');
+  MethodChannel gyroscopeChannel = const MethodChannel("gyroscope_channel");
   double smoothedAngle = 0.0;
   final double smoothingFactor = 0.1;
   @override
   void initState() {
     gyroscopeChannel.setMethodCallHandler((call) async {
-      if (call.method == 'updateGyroscopeValues') {
+      if (call.method == "updateGyroscopeValues") {
         setState(() {
-          double newAngle = call.arguments[1];
+          double newAngle =
+              Platform.isIOS ? call.arguments['y'] : call.arguments[1];
           smoothedAngle = (newAngle * smoothingFactor) +
               (smoothedAngle * (1.0 - smoothingFactor));
         });
